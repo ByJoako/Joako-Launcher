@@ -1,7 +1,7 @@
 {
     "name": "Joako-Launcher",
     "preductname": "Test Launcher",
-    "version": "2.2",
+    "version": "2.2.0",
     "description": "Launcher Mincraft pour le serveur Selvania",
     "main": "src/app.js",
     "author": {
