@@ -1,7 +1,7 @@
 {
     "name": "Joako-Launcher",
     "preductname": "Test Launcher",
-    "version": "2.2.0",
+    "version": "2.2.1",
     "description": "Launcher Mincraft pour le serveur Selvania",
     "main": "src/app.js",
     "author": {
@@ -9,7 +9,7 @@
         "email": "contact@joako.dev",
         "url": "https://github.com/byjoako"
     },
-    "url": "http://launcher.luuxi",
+    "url": "http://207.244.252.245:3000",
     "scripts": {
         "start": "cross-env-shell NODE_ENV=dev electron .",
         "dev": "cross-env-shell DEV_TOOL=open nodemon --exec npm start",
