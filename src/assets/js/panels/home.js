@@ -121,7 +121,7 @@ class Home {
             let configClient = await this.db.readData('configClient')
             configClient.instance_selct = newInstanceSelect.name
             instanceSelect = newInstanceSelect.name
-            await this.db.updateData('configClient' configClient)
+            await this.db.updateData('configClient', configClient)
         }
 
         for (let instance of instancesList) {
