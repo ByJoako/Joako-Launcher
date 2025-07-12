@@ -1,12 +1,12 @@
 {
-    "name": "Joako-Launcher",
-    "preductname": "Test Launcher",
-    "version": "2.2.1",
-    "description": "Launcher Mincraft pour le serveur Selvania",
+    "name": "Pyro-Launcher",
+    "preductname": "Pyro Launcher",
+    "version": "2.2.2",
+    "description": "Lanzador de Minecraft personalizado (Premium y Pirata)",
     "main": "src/app.js",
     "author": {
         "name": "byjoako",
-        "email": "contact@joako.dev",
+        "email": "joako44joako@gmail.com",
         "url": "https://github.com/byjoako"
     },
     "url": "http://207.244.252.245:3000",

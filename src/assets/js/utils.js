@@ -16,28 +16,33 @@ import { skin2D } from './utils/skin.js';
 import slider from './utils/slider.js';
 
 async function setBackground(theme) {
-    if (typeof theme == 'undefined') {
-        let databaseLauncher = new database();
-        let configClient = await databaseLauncher.readData('configClient');
-        theme = configClient?.launcher_config?.theme || "auto"
-        theme = await ipcRenderer.invoke('is-dark-theme', theme).then(res => res)
+    if (typeof theme === 'undefined') {
+        const databaseLauncher = new database();
+        const configClient = await databaseLauncher.readData('configClient');
+        theme = configClient?.launcher_config?.theme || "auto";
+        theme = await ipcRenderer.invoke('is-dark-theme', theme);
     }
-    let background
-    let body = document.body;
+
+    let background;
+    const body = document.body;
     body.className = theme ? 'dark global' : 'light global';
-    if (fs.existsSync(`${__dirname}/assets/images/background/easterEgg`) && Math.random() < 0.005) {
-        let backgrounds = fs.readdirSync(`${__dirname}/assets/images/background/easterEgg`);
-        let Background = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-        background = `url(./assets/images/background/easterEgg/${Background})`;
-    } else if (fs.existsSync(`${__dirname}/assets/images/background/${theme ? 'dark' : 'light'}`)) {
-        let backgrounds = fs.readdirSync(`${__dirname}/assets/images/background/${theme ? 'dark' : 'light'}`);
-        let Background = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-        background = `linear-gradient(#00000080, #00000080), url(./assets/images/background/${theme ? 'dark' : 'light'}/${Background})`;
+
+    const configData = config.GetConfig();
+
+    if (configData.background) {
+        background = configData.background;
+    } else {
+        const dirPath = `${__dirname}/assets/images/background/${theme ? 'dark' : 'light'}`;
+        if (fs.existsSync(dirPath)) {
+            const backgrounds = fs.readdirSync(dirPath);
+            const randomBg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+            background = `linear-gradient(#00000080, #00000080), url(./assets/images/background/${theme ? 'dark' : 'light'}/${randomBg})`;
+        }
     }
-    body.style.backgroundImage = background ? background : theme ? '#000' : '#fff';
+
+    body.style.backgroundImage = background || (theme ? '#000' : '#fff');
     body.style.backgroundSize = 'cover';
 }
-
 async function changePanel(id) {
     let panel = document.querySelector(`.${id}`);
     let active = document.querySelector(`.active`)

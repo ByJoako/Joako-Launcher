@@ -65,7 +65,7 @@ class Index {
                 generateUpdatesFilesForAllChannels: false,
                 appId: preductname,
                 productName: preductname,
-                copyright: 'Copyright © 2020-2024 Luuxis',
+                copyright: 'Copyright © 2025 ByJoako',
                 artifactName: "${productName}-${os}-${arch}.${ext}",
                 extraMetadata: { main: 'app/app.js' },
                 files: ["app/**/*", "package.json", "LICENSE.md"],
@@ -131,19 +131,28 @@ class Index {
     }
 
     async iconSet(url) {
-        let Buffer = await nodeFetch(url)
-        if (Buffer.status == 200) {
-            Buffer = await Buffer.buffer()
-            const image = await Jimp.read(Buffer);
-            Buffer = await image.resize(256, 256).getBufferAsync(Jimp.MIME_PNG)
-            fs.writeFileSync("src/assets/images/icon.icns", png2icons.createICNS(Buffer, png2icons.BILINEAR, 0));
-            fs.writeFileSync("src/assets/images/icon.ico", png2icons.createICO(Buffer, png2icons.HERMITE, 0, false));
-            fs.writeFileSync("src/assets/images/icon.png", Buffer);
-            console.log('new icon set')
-        } else {
-            console.log('connection error')
+    try {
+        const response = await nodeFetch(url);
+
+        if (!response.ok) {
+            console.error(`Connection error: ${response.status} ${response.statusText}`);
+            return;
         }
+
+        const rawBuffer = await response.buffer();
+        const image = await Jimp.read(rawBuffer);
+        const resizedBuffer = await image.resize(256, 256).getBufferAsync(Jimp.MIME_PNG);
+
+        const outputDir = "src/assets/images";
+        fs.writeFileSync(`${outputDir}/icon.icns`, png2icons.createICNS(resizedBuffer, png2icons.BILINEAR, 0));
+        fs.writeFileSync(`${outputDir}/icon.ico`, png2icons.createICO(resizedBuffer, png2icons.HERMITE, 0, false));
+        fs.writeFileSync(`${outputDir}/icon.png`, resizedBuffer);
+
+        console.log("New icon set successfully.");
+    } catch (error) {
+        console.error("Failed to set icon:", error);
     }
+}
 }
 
 new Index().init();
