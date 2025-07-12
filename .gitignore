@@ -1,0 +1,67 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Entorno
+.env
+.env.*.local
+
+# Compilados o empaquetados
+dist/
+build/
+tmp/
+temp/
+.cache/
+*.tsbuildinfo
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Directorios de producción que generás con Webpack u otro builder
+/public/
+output/
+out/
+
+# Archivos generados
+*.tgz
+*.zip
+*.rar
+
+# Base de datos o datos locales
+*.sqlite
+*.db
+*.db-journal
+dump.sql
+
+# Configs personales del editor
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# PM2 / procesos
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Otros
+coverage/
+.nyc_output/
+
+# Archivos de SSL o claves privadas
+*.pem
+*.key
+*.crt
+
+# Evitar subir datos sensibles en general
+secrets.json
+config.local.json
+private-config.json

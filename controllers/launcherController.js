@@ -4,7 +4,8 @@ function getConfig(req, res) {
     maintenance_message: "El lanzador está en mantenimiento.<br>Por favor, inténtelo de nuevo más tarde.",
     online: true,
     client_id: "13f589e1-e2fc-443e-a68a-63b0092b8eeb",
-    dataDirectory: "Pyro"
+    dataDirectory: "Pyro",
+    background: "https://i.imgur.com/I5er8hu.jpg"
   })
 }
 
